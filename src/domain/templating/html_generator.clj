@@ -7,5 +7,14 @@
 (defn template->html [template]
   (h/html template))
 
+(defn string->file [string filename]
+  (spit filename string))
+
+(defn template->file [template filename]
+  (-> template
+      (template->html)
+      (string->file filename)))
+
 (comment
-  (template->html (home-page/template articles.the-living-blog/article)))
+  (template->html (home-page/template articles.the-living-blog/article))
+  (template->file (home-page/template articles.the-living-blog/article) "../../../index.html"))
